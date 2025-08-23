@@ -14,7 +14,10 @@ This project allows users to explore and interact with different word-based feel
 - **Frontend**: React + TypeScript  
 - **Styling**: Tailwind CSS, ShadCN UI  
 - **Build Tool**: Vite  
-- **Package Manager**: npm / yarn  
+- **Package Manager**: npm / yarn
+
+## Live Project Url: 
+https://word-feelings-lab.netlify.app/
 
 ## 📂 Project Structure  
 
