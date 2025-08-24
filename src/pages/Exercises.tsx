@@ -255,7 +255,7 @@ export default function Exercises() {
 
   const resetFeelingGame = () => {
     initializeFeelingGame();
-    setScore(prev => Math.max(0, prev - 20)); // Small penalty for reset
+    setScore(prev => Math.max(0, prev - 20)); 
   };
 
   const renderSortingExercise = () => (
@@ -395,7 +395,7 @@ export default function Exercises() {
         </h3>
         <div className="min-h-[60px] p-4 bg-muted/30 rounded-xl border-2 border-dashed border-primary/30">
           {sentenceWords.length > 0 ? (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {sentenceWords.map((word, index) => (
                 <Badge
                   key={index}
@@ -408,7 +408,7 @@ export default function Exercises() {
               ))}
             </div>
           ) : (
-            <p className="text-muted-foreground text-center py-4">
+            <p className="text-muted-foreground text-center w-full py-4">
               Click words below to build your sentence! 👇
             </p>
           )}
@@ -446,7 +446,7 @@ export default function Exercises() {
       </Card>
 
       {/* Word Categories */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 grid-cols-1 xs:grid-cols-2">
         {/* Subjects */}
         <Card className="card-lab">
           <h4 className="font-bold text-foreground mb-3">👤 Who/What:</h4>
@@ -558,12 +558,12 @@ export default function Exercises() {
           🔍 Find the feeling words in this sentence:
         </h3>
         <div className="p-4 bg-muted/30 rounded-xl">
-          <div className="text-lg leading-relaxed">
+          <div className="text-lg leading-relaxed flex flex-wrap gap-2">
             {sentenceWords3.map((wordObj, index) => (
               <span
                 key={index}
                 onClick={() => handleWordClick(index)}
-                className={`cursor-pointer px-1 py-0.5 rounded transition-all ${
+                className={`cursor-pointer px-1 py-1 rounded transition-all ${
                   wordObj.clicked
                     ? wordObj.isSentiment
                       ? 'bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200'
