@@ -375,168 +375,173 @@ export default function Exercises() {
   );
 
   const renderSentenceExercise = () => (
-    <div className="space-y-6">
-      {/* Score and Reset */}
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <div className="text-lg font-bold text-foreground">
-            Score: {score} points 🌟
-          </div>
-          <Button onClick={resetSentence} variant="outline" size="sm" className="rounded-full">
-            Reset Sentence 🔄
-          </Button>
+  <div className="space-y-6 w-full max-w-full sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto px-2 sm:px-4">
+    {/* Score and Reset */}
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4">
+        <div className="text-base sm:text-lg font-bold text-foreground">
+          Score: {score} points 🌟
         </div>
+        <Button
+          onClick={resetSentence}
+          variant="outline"
+          size="sm"
+          className="rounded-full"
+        >
+          Reset Sentence 🔄
+        </Button>
       </div>
+    </div>
 
-      {/* Current Sentence */}
-      <Card className="card-lab">
-        <h3 className="text-lg font-bold mb-4 text-foreground">
-          📝 Your Sentence:
-        </h3>
-        <div className="min-h-[60px] p-4 bg-muted/30 rounded-xl border-2 border-dashed border-primary/30">
-          {sentenceWords.length > 0 ? (
-            <div className="flex flex-wrap gap-3">
-              {sentenceWords.map((word, index) => (
-                <Badge
-                  key={index}
-                  variant="secondary"
-                  className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground transition-colors"
-                  onClick={() => removeWordFromSentence(index)}
-                >
-                  {word} ✕
-                </Badge>
-              ))}
-            </div>
-          ) : (
-            <p className="text-muted-foreground text-center w-full py-4">
-              Click words below to build your sentence! 👇
-            </p>
-          )}
-        </div>
-        {sentenceWords.length > 0 && (
-          <div className="mt-4 flex gap-2">
-            <Button onClick={analyzeSentence} className="flex-1">
-              Analyze My Sentence! 🔍
-            </Button>
+    {/* Current Sentence */}
+    <Card className="card-lab">
+      <h3 className="text-base sm:text-lg font-bold mb-4 text-foreground">
+        📝 Your Sentence:
+      </h3>
+      <div className="min-h-[60px] p-3 sm:p-4 bg-muted/30 rounded-xl border-2 border-dashed border-primary/30">
+        {sentenceWords.length > 0 ? (
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            {sentenceWords.map((word, index) => (
+              <Badge
+                key={index}
+                variant="secondary"
+                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground transition-colors"
+                onClick={() => removeWordFromSentence(index)}
+              >
+                {word} ✕
+              </Badge>
+            ))}
           </div>
+        ) : (
+          <p className="text-sm sm:text-base text-muted-foreground text-center w-full py-3 sm:py-4">
+            Click words below to build your sentence! 👇
+          </p>
         )}
-      </Card>
-
-      {/* Custom Sentence Input */}
-      <Card className="card-lab">
-        <h3 className="text-lg font-bold mb-4 text-foreground">
-          ✏️ Or Write Your Own Sentence:
-        </h3>
-        <div className="space-y-4">
-          <textarea
-            value={customSentence}
-            onChange={(e) => setCustomSentence(e.target.value)}
-            placeholder="Type your own sentence here... How are you feeling today?"
-            className="w-full p-4 rounded-xl border-2 border-primary/30 bg-muted/30 resize-none focus:border-primary focus:outline-none"
-            rows={3}
-          />
-          <Button 
-            onClick={analyzeCustomSentence} 
-            className="w-full"
-            disabled={!customSentence.trim()}
-          >
-            Analyze My Own Sentence! 🔍 (20 points)
+      </div>
+      {sentenceWords.length > 0 && (
+        <div className="mt-4 flex flex-col sm:flex-row gap-2">
+          <Button onClick={analyzeSentence} className="flex-1">
+            Analyze My Sentence! 🔍
           </Button>
+        </div>
+      )}
+    </Card>
+
+    {/* Custom Sentence Input */}
+    <Card className="card-lab">
+      <h3 className="text-base sm:text-lg font-bold mb-4 text-foreground">
+        ✏️ Or Write Your Own Sentence:
+      </h3>
+      <div className="space-y-3 sm:space-y-4">
+        <textarea
+          value={customSentence}
+          onChange={(e) => setCustomSentence(e.target.value)}
+          placeholder="Type your own sentence here... How are you feeling today?"
+          className="w-full p-3 sm:p-4 rounded-xl border-2 border-primary/30 bg-muted/30 resize-none focus:border-primary focus:outline-none text-sm sm:text-base"
+          rows={3}
+        />
+        <Button
+          onClick={analyzeCustomSentence}
+          className="w-full"
+          disabled={!customSentence.trim()}
+        >
+          Analyze My Own Sentence! 🔍 (20 points)
+        </Button>
+      </div>
+    </Card>
+
+    {/* Word Categories */}
+    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      {/* Subjects */}
+      <Card className="card-lab">
+        <h4 className="font-bold text-foreground mb-2 sm:mb-3">👤 Who/What:</h4>
+        <div className="space-y-2">
+          {availableWords.subjects.map((word, index) => (
+            <Button
+              key={index}
+              variant="outline"
+              size="sm"
+              className="w-full text-left justify-start"
+              onClick={() => addWordToSentence(word)}
+            >
+              {word}
+            </Button>
+          ))}
         </div>
       </Card>
 
-      {/* Word Categories */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 grid-cols-1 xs:grid-cols-2">
-        {/* Subjects */}
-        <Card className="card-lab">
-          <h4 className="font-bold text-foreground mb-3">👤 Who/What:</h4>
-          <div className="space-y-2">
-            {availableWords.subjects.map((word, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                className="w-full text-left justify-start"
-                onClick={() => addWordToSentence(word)}
-              >
-                {word}
-              </Button>
-            ))}
-          </div>
-        </Card>
+      {/* Verbs */}
+      <Card className="card-lab">
+        <h4 className="font-bold text-foreground mb-2 sm:mb-3">⚡ Action:</h4>
+        <div className="space-y-2">
+          {availableWords.verbs.map((word, index) => (
+            <Button
+              key={index}
+              variant="outline"
+              size="sm"
+              className="w-full text-left justify-start"
+              onClick={() => addWordToSentence(word)}
+            >
+              {word}
+            </Button>
+          ))}
+        </div>
+      </Card>
 
-        {/* Verbs */}
-        <Card className="card-lab">
-          <h4 className="font-bold text-foreground mb-3">⚡ Action:</h4>
-          <div className="space-y-2">
-            {availableWords.verbs.map((word, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                className="w-full text-left justify-start"
-                onClick={() => addWordToSentence(word)}
-              >
-                {word}
-              </Button>
-            ))}
-          </div>
-        </Card>
+      {/* Adjectives */}
+      <Card className="card-lab">
+        <h4 className="font-bold text-foreground mb-2 sm:mb-3">🎨 Feeling:</h4>
+        <div className="space-y-2">
+          {availableWords.adjectives.map((word, index) => (
+            <Button
+              key={index}
+              variant="outline"
+              size="sm"
+              className="w-full text-left justify-start"
+              onClick={() => addWordToSentence(word)}
+            >
+              {word}
+            </Button>
+          ))}
+        </div>
+      </Card>
 
-        {/* Adjectives */}
-        <Card className="card-lab">
-          <h4 className="font-bold text-foreground mb-3">🎨 Feeling:</h4>
-          <div className="space-y-2">
-            {availableWords.adjectives.map((word, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                className="w-full text-left justify-start"
-                onClick={() => addWordToSentence(word)}
-              >
-                {word}
-              </Button>
-            ))}
-          </div>
-        </Card>
-
-        {/* Objects */}
-        <Card className="card-lab">
-          <h4 className="font-bold text-foreground mb-3">📅 When/What:</h4>
-          <div className="space-y-2">
-            {availableWords.objects.map((word, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                className="w-full text-left justify-start"
-                onClick={() => addWordToSentence(word)}
-              >
-                {word}
-              </Button>
-            ))}
-          </div>
-        </Card>
-      </div>
-
-      {/* Instructions */}
-      <Card className="card-lab bg-muted/30">
-        <div className="flex items-start gap-4">
-          <div className="text-2xl">💡</div>
-          <div>
-            <h4 className="font-bold text-foreground mb-2">How to Play:</h4>
-            <ul className="text-sm text-muted-foreground space-y-1">
-              <li>• Click words from the categories to build a sentence</li>
-              <li>• Click the ✕ on words in your sentence to remove them</li>
-              <li>• Once you have a sentence, click "Analyze" to see its feeling!</li>
-              <li>• Get 15 points each time you analyze a sentence!</li>
-            </ul>
-          </div>
+      {/* Objects */}
+      <Card className="card-lab">
+        <h4 className="font-bold text-foreground mb-2 sm:mb-3">📅 When/What:</h4>
+        <div className="space-y-2">
+          {availableWords.objects.map((word, index) => (
+            <Button
+              key={index}
+              variant="outline"
+              size="sm"
+              className="w-full text-left justify-start"
+              onClick={() => addWordToSentence(word)}
+            >
+              {word}
+            </Button>
+          ))}
         </div>
       </Card>
     </div>
-  );
+
+    {/* Instructions */}
+    <Card className="card-lab bg-muted/30">
+      <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+        <div className="text-xl sm:text-2xl">💡</div>
+        <div>
+          <h4 className="font-bold text-foreground mb-2">How to Play:</h4>
+          <ul className="text-xs sm:text-sm text-muted-foreground space-y-1">
+            <li>• Click words from the categories to build a sentence</li>
+            <li>• Click the ✕ on words in your sentence to remove them</li>
+            <li>• Once you have a sentence, click "Analyze" to see its feeling!</li>
+            <li>• Get 15 points each time you analyze a sentence!</li>
+          </ul>
+        </div>
+      </div>
+    </Card>
+  </div>
+);
 
   const renderFeelingExercise = () => (
     <div className="space-y-6">
@@ -652,9 +657,9 @@ export default function Exercises() {
         </Card>
 
         {/* Main Exercise Area */}
-        <div className="grid lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Exercise Content */}
-          <div className="lg:col-span-3">
+          <div className="col-span-1 lg:col-span-3">
             <Card className="card-lab">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold mb-2 text-foreground">
